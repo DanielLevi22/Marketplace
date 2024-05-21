@@ -33,7 +33,7 @@ and copy the .env.example variables into a separate .env file, fill them out & a
 
 ## Acknowledgements
 
-- [Payload](https://link.joshtriedcoding.com/payload) for making this project possible
+- [Payload](https://github.com/DanielLevi22/Marketplace) for making this project possible
 
 ## License
 
