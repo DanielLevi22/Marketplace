@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPayload } from 'payload';
+
 import { getPayloadClient } from './get-payload';
 import { nextApp, nextHandler } from './next-utils'
 
@@ -16,26 +16,26 @@ const start = async () => {
       },
     },
   });
-  if (process.env.NEXT_BUILD) {
-    app.listen(PORT, async () => {
-      payload.logger.info(
-        'Next.js is building for production'
-      )
+  // if (process.env.NEXT_BUILD) {
+  //   app.listen(PORT, async () => {
+  //     payload.logger.info(
+  //       'Next.js is building for production'
+  //     )
 
-      // @ts-expect-error
-      await nextBuild(path.join(__dirname, '../'))
+  //     // @ts-expect-error
+  //     await nextBuild(path.join(__dirname, '../'))
 
-      process.exit()
-    })
+  //     process.exit()
+  //   })
 
-    return
-  }
+  //   return
+  // }
   app.use((req, res) => nextHandler(req, res))
   nextApp.prepare().then( () =>{
     app.listen(PORT, async () => {
-      payload.logger.info(
-        `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
-      )
+      // payload.logger.info(
+      //   `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
+      // )
     })
   })
 }
