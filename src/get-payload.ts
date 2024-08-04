@@ -50,7 +50,7 @@ export const getPayloadClient = async ({
         fromName: 'DigitalHippo',
       },
       secret: process.env.PAYLOAD_SECRET,
-      local: initOptions?.express ? false : true,
+      local: !initOptions?.express,
       ...(initOptions || {}),
     })
   }

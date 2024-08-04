@@ -1,5 +1,5 @@
-import { VerifyEmail } from "@/components/verify-email"
-import Image from "next/image"
+import { VerifyEmail } from '@/components/verify-email'
+import Image from 'next/image'
 
 interface PagProps {
   searchParams: {
@@ -8,7 +8,6 @@ interface PagProps {
 }
 
 export default function VerifyEmailPage({ searchParams }: PagProps) {
-
   const token = searchParams.token
   const toEmail = searchParams.to
 
@@ -19,22 +18,23 @@ export default function VerifyEmailPage({ searchParams }: PagProps) {
           <div className="grid gap-6">
             <VerifyEmail token={token} />
           </div>
-        ):(
+        ) : (
           <div className="flex h-full flex-col items-center justify-center space-y-1">
             <div className="relative mb-4 size-60 text-muted-foreground">
-              <Image 
-                src="/hippo-email-sent.png" 
-                fill
-                alt="Hippo Sent Email"
-              />
+              <Image src="/hippo-email-sent.png" fill alt="Hippo Sent Email" />
             </div>
 
             <h3 className="font-semibold text-2xl">Check your email</h3>
-            {toEmail ? <p className="text-muted-foreground text-center">
-              We&apos;ve sent you a verification link to <span className="font-semibold"> {toEmail}</span>
-            </p> : <p className="text-muted-foreground text-center">
-              We&apos;ve sent you a verification link to your email address
-            </p>}
+            {toEmail ? (
+              <p className="text-muted-foreground text-center">
+                We&apos;ve sent you a verification link to{' '}
+                <span className="font-semibold"> {toEmail}</span>
+              </p>
+            ) : (
+              <p className="text-muted-foreground text-center">
+                We&apos;ve sent you a verification link to your email address
+              </p>
+            )}
           </div>
         )}
       </div>

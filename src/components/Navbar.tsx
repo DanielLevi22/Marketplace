@@ -1,13 +1,11 @@
-import Link from "next/link";
-import { MaxWidthWrapper } from "./MaxWidthWrapper";
-import { Icons } from "./Icons";
-import { NavItems } from "./NavItems";
-import { buttonVariants } from "./ui/button";
-import { Cart } from "./Cart";
+import Link from 'next/link'
+import { MaxWidthWrapper } from './MaxWidthWrapper'
+import { Icons } from './Icons'
+import { NavItems } from './NavItems'
+import { buttonVariants } from './ui/button'
+import { Cart } from './Cart'
 
-export  function Navbar() {
-
-
+export function Navbar() {
   const user = null
 
   return (
@@ -18,7 +16,7 @@ export  function Navbar() {
             <div className="flex h-16 items-center">
               <div className="ml-4 flex lg:ml-0">
                 <Link href="/">
-                  <Icons.logo  className="size-10"/>
+                  <Icons.logo className="size-10" />
                 </Link>
               </div>
 
@@ -28,55 +26,50 @@ export  function Navbar() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                {user ? null : (
+                  {user ? null : (
                     <Link
-                      href='/sign-in'
+                      href="/sign-in"
                       className={buttonVariants({
                         variant: 'ghost',
-                      })}>
+                      })}
+                    >
                       Sign in
                     </Link>
                   )}
 
                   {user ? null : (
-                    <span
-                      className='h-6 w-px bg-gray-200'
-                      aria-hidden='true'
-                    />
+                    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   )}
 
                   {user ? (
                     <UserAccountNav user={user} />
                   ) : (
                     <Link
-                      href='/sign-up'
+                      href="/sign-up"
                       className={buttonVariants({
                         variant: 'ghost',
-                      })}>
+                      })}
+                    >
                       Create account
                     </Link>
                   )}
 
                   {user ? (
-                    <span
-                      className='h-6 w-px bg-gray-200'
-                      aria-hidden='true'
-                    />
+                    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   ) : null}
 
                   {user ? null : (
-                    <div className='flex lg:ml-6'>
+                    <div className="flex lg:ml-6">
                       <span
-                        className='h-6 w-px bg-gray-200'
-                        aria-hidden='true'
+                        className="h-6 w-px bg-gray-200"
+                        aria-hidden="true"
                       />
                     </div>
                   )}
 
-                <div className="ml-4 flow-root lg:ml-6">
-                  <Cart />
-                </div>
-                   
+                  <div className="ml-4 flow-root lg:ml-6">
+                    <Cart />
+                  </div>
                 </div>
               </div>
             </div>
