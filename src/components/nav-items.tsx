@@ -2,7 +2,7 @@
 
 import { PRODUCT_CATEGORIES } from '@/config'
 import { KeyboardEvent, useEffect, useRef, useState } from 'react'
-import { NavItem } from './NavItem'
+import { NavItem } from './nav-item'
 import { useOnClickOutside } from '@/hooks/use-on-click-outside'
 
 export function NavItems() {
