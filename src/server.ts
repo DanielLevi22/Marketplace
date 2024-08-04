@@ -8,6 +8,11 @@ import { appRouter } from './trpc';
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
+
+
+import 'dotenv'
+
+
 const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) => {
   return {
     req,
