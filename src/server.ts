@@ -11,6 +11,7 @@ const PORT = Number(process.env.PORT) || 3000;
 
 
 import 'dotenv'
+import { inferAsyncReturnType } from '@trpc/server';
 
 
 const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) => {
@@ -19,6 +20,8 @@ const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) =>
     res,
   };
 };
+
+export type ExpressContext = inferAsyncReturnType<typeof createContext>
 
 
 const start = async () => {
