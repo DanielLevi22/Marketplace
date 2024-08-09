@@ -13,9 +13,17 @@ import { formatPrice } from '@/lib/utils'
 import Link from 'next/link'
 import { buttonVariants } from './ui/button'
 import Image from 'next/image'
+import { useCart } from '@/hooks/use-cart'
+import { ScrollArea } from './ui/scroll-area'
+import { CartItem } from './cart-item'
 
 export function Cart() {
-  const itemCount = 0
+  const { items } = useCart()
+  const itemCount = items.length
+
+  const cartTotal = items.reduce((total,{ product}) => {
+    return total + product.price
+  }, 0)
   const fee = 1
   return (
     <Sheet>
@@ -35,6 +43,11 @@ export function Cart() {
         {itemCount > 0 ? (
           <>
             <div className="flex flex-col w-full pr-6">cart items</div>
+            <ScrollArea>
+              {items.map(({ product }) => (
+                <CartItem key={product.id} product={product} />
+              ))}
+            </ScrollArea>
             <div className="space-y-4 pr-6">
               <Separator />
               <div className="space-y-1.5 text-sm">
@@ -48,7 +61,7 @@ export function Cart() {
                 </div>
                 <div className="flex">
                   <span className="flex-1 ">Total</span>
-                  <span>{formatPrice(fee)}</span>
+                  <span>{formatPrice(cartTotal + fee)}</span>
                 </div>
               </div>
 
