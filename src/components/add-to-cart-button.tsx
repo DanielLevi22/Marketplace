@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import type { Product } from "@/payload-types";
+import { useCart } from "@/hooks/use-cart";
 
-export function AddToCartButton({ product }: { product: any }) {
+export function AddToCartButton({ product }: { product: Product }) {
+  const { addItem } = useCart()
   const [isSuccess, setIsSuccess] = useState(false)
 
   useEffect(() => {
@@ -16,10 +19,14 @@ export function AddToCartButton({ product }: { product: any }) {
 
   return (
     <Button 
-      onClick={() => 
-      setIsSuccess(true)}  
+      onClick={() => {
+        addItem(product)
+        setIsSuccess(true)
+      }}  
+        
       size="lg" 
       className="w-full"
+      
     >
       {isSuccess ? "Added!" : "Add to cart"}
     </Button>

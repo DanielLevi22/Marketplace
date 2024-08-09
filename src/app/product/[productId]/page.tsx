@@ -5,6 +5,7 @@ import { ProductReel } from "@/components/product-reel"
 import { PRODUCT_CATEGORIES } from "@/config"
 import { getPayloadClient } from "@/get-payload"
 import { formatPrice } from "@/lib/utils"
+import type { Product } from "@/payload-types"
 import { Check, Shield } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -36,10 +37,9 @@ export default async function ProductPage({ params}: ProductPageProps) {
         equals: 'approved',
       },
     },
-  })
+  }) 
 
-  const [product] = products
-
+  const [product] = products as unknown as Product[];
   if (!product) return notFound()
 
   const label = PRODUCT_CATEGORIES.find(
