@@ -16,10 +16,14 @@ import Image from 'next/image'
 import { useCart } from '@/hooks/use-cart'
 import { ScrollArea } from './ui/scroll-area'
 import { CartItem } from './cart-item'
+import { useEffect, useState } from 'react'
 
 export function Cart() {
   const { items } = useCart()
   const itemCount = items.length
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => { setIsMounted(true) }, [])
 
   const cartTotal = items.reduce((total,{ product}) => {
     return total + product.price
