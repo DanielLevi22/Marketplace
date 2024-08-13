@@ -23,7 +23,9 @@ export function Cart() {
   const itemCount = items.length
   const [isMounted, setIsMounted] = useState(false)
 
-  useEffect(() => { setIsMounted(true) }, [])
+  useEffect(() => {
+     setIsMounted(true) 
+    }, [])
 
   const cartTotal = items.reduce((total,{ product}) => {
     return total + product.price

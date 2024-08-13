@@ -4,7 +4,7 @@ import {
 } from 'payload/dist/collections/config/types'
 import { PRODUCT_CATEGORIES } from '../../config'
 import { Access, CollectionConfig } from 'payload/types'
-import { User ,Product} from '../../payload-types'
+import { Product, User } from '../../payload-types'
 import { stripe } from '../../lib/stripe'
 
 const addUser: BeforeChangeHook<Product> = async ({
@@ -77,6 +77,7 @@ const isAdminOrHasAccess =
       },
     }
   }
+
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
