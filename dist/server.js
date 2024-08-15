@@ -65,6 +65,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var get_payload_1 = require("./get-payload");
 var next_utils_1 = require("./next-utils");
+var url_1 = require("url");
 var body_parser_1 = __importDefault(require("body-parser"));
 var webhooks_1 = require("./webhooks");
 var trpcExpress = __importStar(require("@trpc/server/adapters/express"));
@@ -80,7 +81,7 @@ var createContext = function (_a) {
     };
 };
 var start = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var webhookMiddleware, payload;
+    var webhookMiddleware, payload, cartRouter;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -107,35 +108,21 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                     router: trpc_1.appRouter,
                     createContext: createContext,
                 }));
-                // if (process.env.NEXT_BUILD) {
-                //   app.listen(PORT, async () => {
-                //     payload.logger.info(
-                //       'Next.js is building for production'
-                //     )
-                //     // @ts-expect-error
-                //     await nextBuild(path.join(__dirname, '../'))
-                //     process.exit()
-                //   })
-                //   return
-                // }
-                // const cartRouter = express.Router()
-                // cartRouter.use(payload.authenticate)
-                // cartRouter.get('/', (req, res) => {
-                //   const request = req as PayloadRequest
-                //   if (!request.user)
-                //     return res.redirect('/sign-in?origin=cart')
-                //   const parsedUrl = parse(req.url, true)
-                //   const { query } = parsedUrl
-                //   return nextApp.render(req, res, '/cart', query)
-                // })
-                // app.use('/cart', cartRouter)
-                // app.use(
-                //   '/api/trpc',
-                //   trpcExpress.createExpressMiddleware({
-                //     router: appRouter,
-                //     createContext,
-                //   })
-                // )
+                cartRouter = express_1.default.Router();
+                cartRouter.use(payload.authenticate);
+                cartRouter.get('/', function (req, res) {
+                    var request = req;
+                    if (!request.user)
+                        return res.redirect('/sign-in?origin=cart');
+                    var parsedUrl = (0, url_1.parse)(req.url, true);
+                    var query = parsedUrl.query;
+                    return next_utils_1.nextApp.render(req, res, '/cart', query);
+                });
+                app.use('/cart', cartRouter);
+                app.use('/api/trpc', trpcExpress.createExpressMiddleware({
+                    router: trpc_1.appRouter,
+                    createContext: createContext,
+                }));
                 app.use(function (req, res) { return (0, next_utils_1.nextHandler)(req, res); });
                 next_utils_1.nextApp.prepare().then(function () {
                     app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
