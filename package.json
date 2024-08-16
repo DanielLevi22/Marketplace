@@ -6,7 +6,8 @@
   "build:next": "next build", 
   "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
   "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
-  "build:payload": "cross-env NODE_OPTIONS='--max_old_space_size=512' cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
+  "build:payload": "cross-env NODE_OPTIONS='--max_old_space_size=1024' PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build"
+,
   "build:server": "tsc --project tsconfig.server.json",
   "build": "cross-env NODE_ENV=production yarn build:payload && yarn build:server && yarn copyfiles && yarn build:next",
   "start": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
